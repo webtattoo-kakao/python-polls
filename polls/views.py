@@ -63,6 +63,7 @@ def results(request, question_id):
     })
 
 
+# add function
 def testpage(request):
     return HttpResponse("TEST")
 
