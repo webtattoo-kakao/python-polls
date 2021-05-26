@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>설문 목록</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
+</head>
+<body>
+    <h1>설문 목록을 선택해 주세요</h1>
+    <div>
+        <img class="vote-image" src="{% static 'polls/images/vote.png' %}"/>
+    </div>
+
+    {% if list %}
+        <ul>
+        {% for q in list %}
+            <li>
+                <!--
+                <a href="/polls/{{q.id}}/">{{q}}</a>
+                -->
+                <a href="{% url 'polls:detail' q.id %}">{{q}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>현재 진행할 설문이 없습니다.</p>
+    {% endif %}
+
+</body>
+</html>

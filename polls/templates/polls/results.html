@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>설문 상세</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
+</head>
+<body>
+    <div class="results">
+        <h1>설문 내용 결과</h1>
+        <p>
+            {{question}}
+        </p>
+        <ul>
+        {% for c in question.choice_set.all %}
+            <li>
+                <p>
+                    {{c.choice_text}}
+                    --
+                    {{c.votes}} vote{% if c.votes > 1 %}s{% endif %}
+
+                    <!--
+                    {{c.votes}} vote{{c.votes|pluralize}}
+                    -->
+                </p>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <div>
+            <a href="{% url 'polls:index' %}">전체 투표 목록</a>
+            |
+            <a href="{% url 'polls:detail' question.id %}">다시 투표할꺼임?</a>
+        </div>
+    </div>
+</body>
+</html>

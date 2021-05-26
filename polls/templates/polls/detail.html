@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>설문 상세</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
+</head>
+<body>
+    <div class="detail">
+        {% if error_message %}
+            <p class="warning"><strong>{{error_message}}</strong></p>
+        {% endif %}
+
+        <h1>설문 내용을 선택해 주세요.</h1>
+
+        <p>
+            {{question}}
+        </p>
+        <p>
+            {{question.question_description}}
+        </p>
+        <!--
+        <form method="post" action="/polls/{{question.id}}/vote/">
+        -->
+        <form method="post" action="{% url 'polls:vote' question.id %}">
+            {% csrf_token %}
+            <ul>
+            {% for c in question.choice_set.all %}
+                <li>
+                    <input id="choice_{{c.id}}" name="choice_id" type="radio" value="{{c.id}}" required><label for="choice_{{c.id}}">{{c.choice_text}}</label>
+                </li>
+            {% endfor %}
+                <!--
+                <li>
+                    <input id="choice_999" name="choice_id" type="radio" value="999" required><label for="choice_999">에러가 나오는 아이템</label>
+                </li>
+                -->
+            </ul>
+            <button type="submit">VOTE</button>
+        </form>
+    </div>
+</body>
+</html>
