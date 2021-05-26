@@ -63,15 +63,8 @@ def results(request, question_id):
     })
 
 
-
-
-
-
-
-
-
-
-
+def testpage(request):
+    return HttpResponse("TEST")
 
 
 
